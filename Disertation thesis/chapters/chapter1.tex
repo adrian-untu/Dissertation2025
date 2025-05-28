@@ -1,0 +1,52 @@
+\chapter{Related Work}
+
+The increasing autonomy of vehicles raises not only technical but also critical ethical challenges. As these systems gain the ability to make complex driving decisions without human intervention, the question arises: how should these decisions be evaluated from an ethical standpoint?
+
+\section{Theoretical Background}
+
+\subsection{Ethical Dilemmas in Autonomous Driving}
+
+Autonomous vehicles (AVs) are rapidly becoming a key part of transportation innovation. While they promise increased safety and mobility—particularly for individuals with disabilities—they also bring forth a range of ethical and societal challenges. One widely discussed ethical scenario is the adaptation of the classical trolley problem: what should an AV do when confronted with two outcomes, both involving potential harm?
+
+The "Moral Machine" experiment developed by MIT addressed this question by collecting millions of responses from people around the world, revealing significant cultural differences in what is considered “the right” ethical decision \cite{shariff2018moral}. However, such extreme dilemmas are rare in real-life driving. More commonly, AVs must handle everyday ethical choices—such as reacting to jaywalking pedestrians, sharing the road with cyclists, or choosing safe behavior in dense traffic conditions \cite{greene2016driverless}.
+
+These subtle, everyday moral decisions are now the focus of my research and are being analyzed using a combination of rule-based assessments and natural language inputs. For example:
+
+\begin{quote}
+"This vehicle does not operate fully autonomously in both urban and rural areas. It does require human intervention and the human is capable of handling all traffic conditions."
+
+\textbf{Assessment:} SAE Level 0 — Human Responsibility  
+\textbf{Conclusion:} Text complies with ethical expectations for this level.
+\end{quote}
+
+\begin{quote}
+"The autonomous vehicle is designed to prioritize the safety of its passengers, even if it means endangering pedestrians in extreme situations."
+
+\textbf{Assessment:} SAE Level 5 — Full Responsibility  
+\textbf{Conclusion:} Text may conflict with ethical expectations for this level.
+\end{quote}
+
+\subsection{Decision-Making Models in AV Ethics}
+
+Several ethical decision-making models have been proposed to guide AV behavior:
+
+\begin{itemize}
+    \item \textbf{Rule-based systems:} These rely on strict adherence to traffic laws and regulations.
+    \item \textbf{Consequentialist models:} These evaluate the outcomes of each possible action and choose the one that minimizes harm.
+    \item \textbf{Data-driven ethical learning:} These models learn from aggregated human decisions in similar scenarios, attempting to mimic human judgment \cite{mcdermid2021ethics}.
+\end{itemize}
+
+A more nuanced approach is the \textit{Ethical Valence Theory}, which argues that AVs should consider not only the number of people involved but also social vulnerability, likelihood of injury, and contextual sensitivity \cite{millar2022ethical}.
+
+\subsection{Regulation and Legal Frameworks}
+
+Ethical programming alone is not sufficient; these vehicles must operate within a legal framework that reflects society's values. Currently, there is no globally unified legislative approach to AV ethics. However, the European Union has introduced the \textit{Ethics Guidelines for Trustworthy AI}, while countries such as Germany and Japan have created national ethics committees to guide AV development \cite{ecguidelines2019}.
+
+My dissertation further analyzes these frameworks in comparison to tools like the MIT Moral Machine, assessing how effective or incomplete they are when applied in real-world ethical evaluations.
+
+\subsection{Complementary Technologies}
+
+To increase transparency and trust, technologies such as Natural Language Processing (NLP) and Explainable AI (XAI) play a vital role. These systems allow AVs to justify their decisions in human-understandable ways, which is crucial in scenarios involving accidents or unexpected behavior.
+
+Moreover, ethical databases derived from real-world user inputs and public consultations are being developed to train AV systems according to cultural values and social expectations \cite{shariff2018moral, millar2022ethical}.
+
