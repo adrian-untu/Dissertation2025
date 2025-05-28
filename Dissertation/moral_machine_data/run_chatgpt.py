@@ -1,6 +1,5 @@
 import openai
-openai.api_key = "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"
-
+openai.api_key = ""
 import pandas as pd
 import random
 from tqdm import tqdm
