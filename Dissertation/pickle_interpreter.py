@@ -1,3 +1,4 @@
+import os
 import pickle
 from collections import Counter
 
@@ -28,12 +29,12 @@ def validate_decision(scenario, decision):
     # Assuming traffic_light_pattern[0] corresponds to Case 1, [1] to Case 2
     # If decision chooses to kill pedestrians crossing on green light, override.
     if is_law:
-        if decision == "Case 1" and traffic_light_pattern[0] == "green":
+        if decision.__contains__("Case 1") and traffic_light_pattern[0] == "green":
             # hitting pedestrians crossing legally = illegal
             # Override to Case 2 if it's safer/legal
             if traffic_light_pattern[1] != "green":
                 return "Case 2"
-        elif decision == "Case 2" and traffic_light_pattern[1] == "green":
+        elif decision.__contains__("Case 2") and traffic_light_pattern[1] == "green":
             if traffic_light_pattern[0] != "green":
                 return "Case 1"
 
@@ -61,7 +62,7 @@ def main_pipeline(pickle_path):
     for idx, case in cases.iterrows():
         original_decision = case["chatgpt_response"]
 
-        if original_decision not in ["Case 1", "Case 2"]:
+        if original_decision not in ["Case 1.", "Case 2.", "Case 1", "Case 2"]:
             print(f"Warning: Case {idx} has invalid model response: {original_decision}")
             continue
 
@@ -85,10 +86,7 @@ def main_pipeline(pickle_path):
 
 # Example usage:
 if __name__ == "__main__":
-    pickle_file_path = "moral_machine_data/results_300_scenarios_seed123_gpt-4o.pickle"  # put your path here
-    results = main_pipeline(pickle_file_path)
-
-    # Example: print some results
-    for res in results[:5]:
-        print(
-            f"Case {res['case_index']}: Original={res['original_decision']}, Final={res['final_decision']}, Overridden={res['was_overridden']}")
+    for root, dirs, files in os.walk('moral_machine_data'):
+        for file in files:
+            if file.__contains__(".pickle"):
+                results = main_pipeline('moral_machine_data/' + file)
