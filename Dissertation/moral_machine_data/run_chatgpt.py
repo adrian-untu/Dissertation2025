@@ -1,5 +1,6 @@
 import openai
-openai.api_key = ""
+openai.api_key = "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"
+
 import pandas as pd
 import random
 from tqdm import tqdm
@@ -11,8 +12,8 @@ import argparse
 
 #### Parameters #############
 parser = argparse.ArgumentParser(description='Run ChatGPT')
-parser.add_argument('--model', default='o1-mini', type=str)
-parser.add_argument('--nb_scenarios', default='3', type=int)
+parser.add_argument('--model', default='gpt-4o', type=str)
+parser.add_argument('--nb_scenarios', default='1000', type=int)
 parser.add_argument('--random_seed', default='123', type=int)
 args = parser.parse_args()
 
@@ -51,7 +52,7 @@ for i in tqdm(range(args.nb_scenarios)):
   # obtain chatgpt response
   response = chatgpt(system_content, user_content)
   scenario_info['chatgpt_response'] = response['choices'][0]['message']['content']
-  #print(scenario_info)
+  print(scenario_info)
 
   scenario_info_list.append(scenario_info)
 

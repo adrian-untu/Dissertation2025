@@ -1,3 +1,4 @@
+import re
 import sqlite3
 import spacy
 import os
@@ -122,11 +123,9 @@ def analyze_text(text):
 
     # Flatten and normalize input text for simple search
     lowered_text = text.lower()
-
-    # Search for keywords
     for level, key_set in level_keywords.items():
-        for word in key_set:
-            if word in lowered_text:
+        for phrase in key_set:
+            if re.search(r'\b' + re.escape(phrase) + r'\b', lowered_text):
                 return level, keywords
 
     return None, keywords
@@ -161,6 +160,60 @@ def check_ethics(text):
         return "No ethical rule found for this level."
 
 
+def row_to_scenario_text_gpt(row):
+    side_1_people = ', '.join([f"{v}x {k}" for k, v in row['count_dict_1'].items()])
+    side_2_people = ', '.join([f"{v}x {k}" for k, v in row['count_dict_2'].items()])
+
+    action = "intervene" if row['is_interventionism'] else "not intervene"
+    in_car = "in the car" if row['is_in_car'] else "outside the car"
+
+    text = (f"The vehicle is {in_car}. "
+            f"On side 1, there are: {side_1_people}. "
+            f"On side 2, there are: {side_2_people}. "
+            f"The scenario dimension is '{row['scenario_dimension']}'. "
+            f"This is a fully autonomous vehicle. "
+            f"The vehicle must decide whether to {action}.")
+    print(text)
+
+    return text
+
+def interpret_ethics(df):
+    total_cases = len(df)
+    invalid_cases = []
+    valid_cases = []
+    for idx, row in df.iterrows():
+        scenario_text = row_to_scenario_text_gpt(row)
+        ethics_result = check_ethics(scenario_text)
+        valid = "may conflict" not in ethics_result.lower()
+        if not valid:
+            invalid_cases.append((idx, row['chatgpt_response'], ethics_result))
+            print(f"Warning: Case {idx} has invalid model response: {row['chatgpt_response']}")
+
+        else:
+            valid_cases.append((idx, row['chatgpt_response'], ethics_result))
+        print(f"Ethics check result: {ethics_result}\n")
+
+    print(f"Total cases: {total_cases}")
+    print(f"Cases with ethical conflicts: {len(invalid_cases)}")
+    print(f"Cases passing ethics check: {len(valid_cases)}")
+
+
+    # You could export this info to CSV or JSON for analysis
+    return invalid_cases
+
+
+def validate_decision(row):
+    scenario_text = row_to_scenario_text_gpt(row)
+    ethics_comment = check_ethics(scenario_text)
+
+    # Example simplistic check: if ethics_comment says "may conflict", mark invalid
+    if "may conflict" in ethics_comment.lower():
+        return False
+    return True
+
+
+
+
 # ---------- Example Usage ---------- #
 
 if __name__ == "__main__":
@@ -190,9 +243,31 @@ if __name__ == "__main__":
         for file in files:
             file_path = os.path.join(root, file)
             print(file_path)
-            if file_path.endswith('.csv') and file_path.__contains__('data\\data'):
+            if file_path.endswith('.csv') and file_path.__contains__('data\\data') and not file_path.__contains__("summary_overall"):
                 try:
                     df = load_moral_data(os.path.join(root, file))
-                    process_moral_machine_scenarios(df)
+                    print(df)
+                    # process_moral_machine_scenarios(df)
                 except:
                     print(f"Could not extract data from {file}")
+    import pickle
+
+    # Replace 'your_file.pickle' with your actual filename
+    with open('moral_machine_data/results_300_scenarios_seed123_gpt-4o.pickle', 'rb') as file:
+        df = pickle.load(file)
+
+    # conflicts = interpret_ethics(df)
+    # print(conflicts)
+
+    print(df.columns)
+    #
+    # # Now you can use 'data' as a Python object
+    for idx, row in df.iterrows():
+        print(row.values)
+    #     scenario_text = row_to_scenario_text_gpt(row)
+    #     ethics_result = check_ethics(scenario_text)
+    #     print(f"Case {idx} Ethics Check:")
+    #     print(ethics_result)
+    #     print("----------------------")
+
+
