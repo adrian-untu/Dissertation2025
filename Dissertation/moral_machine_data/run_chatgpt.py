@@ -1,5 +1,5 @@
 import openai
-openai.api_key = "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"
+openai.api_key = ""
 
 import pandas as pd
 import random
