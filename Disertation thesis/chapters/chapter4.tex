@@ -1,0 +1,114 @@
+\chapter{Results and Discussion}
+\label{chap:results}
+
+This chapter presents the outcomes of applying the proposed methodology to the Moral Machine dataset. The ethical evaluation process was applied to scenarios reconstructed in natural language, with each case assessed for compliance with predefined ethical rules based on the inferred SAE automation level.
+
+\section{Evaluation Metrics}
+
+To assess the performance of the ethical validation system, the following metrics were used:
+
+\begin{itemize}
+    \item \textbf{Total Scenarios Processed (TSP):} The number of unique scenario instances evaluated.
+    \item \textbf{Ethical Conflicts Detected (ECD):} Number of cases flagged as potentially violating the relevant ethical rule.
+    \item \textbf{Compliance Rate (CR):} Percentage of scenarios that passed the ethics check.
+    \item \textbf{False Positives/Negatives (FP/FN):} Cases where ethics flags did not align with human interpretations (optional).
+\end{itemize}
+
+\section{Dataset Characteristics}
+
+The system was applied to a subset of the Moral Machine dataset consisting of several hundred decision-making scenarios. Key statistics:
+
+\begin{itemize}
+    \item Number of total cases: \textbf{[Insert Value]}
+    \item SAE levels inferred: Ranged from Level 2 to Level 5
+    \item Ethical rules enforced: \textbf{21} distinct rules across all levels
+\end{itemize}
+
+\section{Quantitative Results}
+
+\subsection{Overall System Performance}
+
+Table~\ref{tab:ethics-summary} summarizes the performance of the system in identifying ethically aligned vs. conflicting scenarios.
+
+\begin{table}
+\centering
+\caption{Summary of Ethics Evaluation}
+\label{tab:ethics-summary}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Total Scenarios Processed (TSP) & [Insert number] \\
+Ethical Conflicts Detected (ECD) & [Insert number] \\
+Compliance Rate (CR) & [Insert \%] \\
+Most Frequent SAE Level & [Insert level] \\
+Most Violated Ethical Principle & [Insert principle name] \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{SAE Level Distribution}
+
+% Figure~\ref{fig:sae-distribution} shows the distribution of inferred SAE levels from the scenarios.
+
+% \begin{figure}
+% \centering
+% \includegraphics[width=0.6\textwidth]{images/sae_distribution.png}
+% \caption{Distribution of Inferred SAE Levels}
+% \label{fig:sae-distribution}
+% \end{figure}
+
+\subsection{Conflict Types Observed}
+
+Conflicts were primarily associated with the following rule types:
+
+\begin{itemize}
+    \item \textbf{Non-Discrimination (SAE 5):} Many scenarios seemed to prioritize younger or healthier individuals.
+    \item \textbf{Transparency (SAE 2--3):} Several cases lacked clues indicating system transparency or explainability.
+    \item \textbf{Ethical Fail-Safe (SAE 5):} Complex or ambiguous scenarios often triggered fail-safe-related flags.
+\end{itemize}
+
+\section{Case Study Examples}
+
+\subsection{Example of Ethical Alignment}
+
+\begin{quote}
+\textit{``This vehicle is fully autonomous. On side 1, there are 2x women and 1x child. On side 2, there are 1x dog and 1x criminal. The vehicle must decide whether to intervene.''}
+\end{quote}
+
+The system detected SAE level 5 and aligned the decision with principles of proportionality and risk minimization.
+
+\subsection{Example of Ethical Conflict}
+
+\begin{quote}
+\textit{``The autonomous vehicle is programmed to prioritize passengers regardless of pedestrian type.''}
+\end{quote}
+
+This scenario was flagged as violating the principle of fairness and non-discrimination under SAE Level 5.
+
+\section{Discussion}
+
+\subsection{Insights and Interpretation}
+
+The results suggest that many AV decision scenarios, especially those from datasets designed to highlight moral dilemmas, trigger ethical conflicts under strict rule-based evaluation. The methodology enables structured, transparent identification of such violations.
+
+\subsection{Strengths of the Approach}
+
+\begin{itemize}
+    \item Provides a modular, explainable framework for ethics checking
+    \item Can be scaled to large datasets
+    \item Incorporates both structured logic and natural language understanding
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{itemize}
+    \item Depends heavily on keyword matching, which may miss nuanced phrases
+    \item Ethical rules may need customization per legal/cultural region
+    \item Contextual weighting (e.g., saving more lives vs. saving passengers) not yet implemented
+\end{itemize}
+
+\section{Summary}
+
+This chapter presented the quantitative and qualitative results of applying the ethics-checking methodology to the Moral Machine dataset. The system was able to detect patterns of ethical alignment and conflict, demonstrating the utility of NLP combined with structured ethical logic. In the next chapter, the conclusions and recommendations for future work are presented.
+

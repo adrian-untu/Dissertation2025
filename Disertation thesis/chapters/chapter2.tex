@@ -1,10 +1,59 @@
-% \chapter{Method}
-% 
-% This chapter describes 
-% 
-% \begin{itemize}
-    % \item \textit{How was }?
-    % \item \textit{What were }?
-    % \item \textit{How can the }?
-% \end{itemize}
+\chapter{Literature Review}
+
+This chapter reviews the theoretical and technological foundations relevant to the ethical evaluation of autonomous vehicle decisions. It is divided into four main areas: (1) ethical dilemmas in autonomous driving, (2) the Moral Machine dataset, (3) SAE levels of automation, and (4) natural language processing (NLP) in ethical AI systems.
+
+\section{Ethical Dilemmas in Autonomous Vehicles}
+
+Autonomous vehicles (AVs) face complex ethical dilemmas that require decision-making beyond programmed logic. A widely recognized example is the \textit{trolley problem}, where a vehicle must choose between two harmful outcomes. These scenarios demand ethical frameworks that align with human values and societal norms \cite{goodall2014ethics, lin2016ethics}.
+
+Traditional programming approaches fall short in handling such nuanced trade-offs, which has led to efforts to encode moral reasoning into AVs using decision-theoretic and rule-based methods.
+
+\section{The Moral Machine Experiment}
+
+The \textit{Moral Machine} project by MIT Media Lab collected over 40 million ethical decisions from people across the world \cite{awad2018moral}. Participants were presented with variations of trolley-type dilemmas involving pedestrians and passengers, with diverse attributes (age, gender, profession, lawfulness).
+
+This large-scale dataset provides insights into:
+\begin{itemize}
+    \item Cultural and regional preferences for ethical decisions
+    \item Patterns in human moral reasoning
+    \item Factors influencing perceived fairness and justice
+\end{itemize}
+
+It serves as a benchmark for comparing algorithmic decisions against human judgments.
+
+\section{SAE Levels of Vehicle Automation}
+
+The Society of Automotive Engineers (SAE) defines six levels of driving automation, from Level 0 (no automation) to Level 5 (full automation) \cite{sae2018j3016}. Each level has implications for ethical responsibility:
+
+\begin{itemize}
+    \item \textbf{Level 0--2}: Driver retains full or partial control.
+    \item \textbf{Level 3--4}: Shared or conditional autonomy.
+    \item \textbf{Level 5}: Full machine decision-making without human input.
+\end{itemize}
+
+As automation increases, the ethical responsibility shifts from human to machine, necessitating advanced ethical rule systems embedded within AVs.
+
+\section{Ethics in Artificial Intelligence}
+
+Recent literature stresses the importance of fairness, accountability, transparency, and explainability (FATE) in AI systems \cite{jobin2019global}. In the context of AVs, this includes:
+
+\begin{itemize}
+    \item Distributing risk equitably among all road users
+    \item Avoiding discrimination by age, income, or status
+    \item Logging and auditing ethical decisions made by AI
+\end{itemize}
+
+Rule-based systems and value-sensitive design are commonly used to encode ethical principles into AV logic \cite{binns2018fairness}.
+
+\section{Natural Language Processing in Ethical Analysis}
+
+Natural language processing (NLP) plays a crucial role in translating scenario descriptions into structured ethical evaluations. Tools like spaCy and transformers allow systems to extract intent, action, and moral context from text \cite{jurafsky2023speech}.
+
+In this project, we use keyword detection, lemmatization, and scenario generation to infer the SAE level and evaluate compliance with ethical rules. This bridges unstructured data (scenario text) and structured ethical frameworks.
+
+\section{Summary}
+
+This review shows the growing importance of integrating NLP and ethical reasoning in autonomous systems. The Moral Machine dataset provides a rich source for testing human-aligned ethics. SAE levels offer a framework for responsibility segmentation, while NLP enables automated ethical evaluation from naturalistic input.
+
+The next chapter details the methodology used to develop and test our ethics-checking system.
 
